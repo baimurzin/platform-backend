@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -12,10 +13,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     String USERS_BY_EMAIL_CACHE = "usersByEmail";
 
-    User findOneByActivationKey(String activationKey);
+    Optional<User> findOneByActivationKey(String activationKey);
 
-    User findAllByConfirmedIsFalseAndCreatedDateBefore(Instant dateTime);
+    List<User> findAllByConfirmedIsFalseAndCreatedDateBefore(Instant dateTime);
 
-    User findOneByEmailIgnoreCase(String email);
+    Optional<User> findOneByEmailIgnoreCase(String email);
 
 }

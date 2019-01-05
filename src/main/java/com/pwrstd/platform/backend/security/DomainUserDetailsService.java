@@ -34,11 +34,9 @@ public class DomainUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
         log.debug("Authenticating {}", email);
         if (new EmailValidator().isValid(email, null)) {
-            User oneByEmailIgnoreCase = userRepository.findOneByEmailIgnoreCase(email);
-            if (oneByEmailIgnoreCase == null) {
-                throw new UsernameNotFoundException("User with email " + email + " was not found in the database");
-            }
-            return createSpringSecurityUser(email, oneByEmailIgnoreCase);
+            return userRepository.findOneByEmailIgnoreCase(email)
+                    .map(user -> createSpringSecurityUser(email, user))
+                    .orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " was not found in the database"));
         }
         return null;
     }

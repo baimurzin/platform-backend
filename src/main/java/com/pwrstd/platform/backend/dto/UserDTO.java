@@ -1,15 +1,18 @@
 package com.pwrstd.platform.backend.dto;
 
 
+import com.pwrstd.platform.backend.model.User;
+
 public class UserDTO {
     private Long id;
     private String email;
     private String password;
-    private String confirmPassword;
-
-    private boolean activated = false;
+    private String timezone;
 
     private String langKey;
+
+    public UserDTO() {
+    }
 
     public Long getId() {
         return id;
@@ -17,14 +20,6 @@ public class UserDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public boolean isActivated() {
-        return activated;
-    }
-
-    public void setActivated(boolean activated) {
-        this.activated = activated;
     }
 
     public String getLangKey() {
@@ -51,11 +46,11 @@ public class UserDTO {
         this.password = password;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
+    public String getTimezone() {
+        return timezone;
     }
 
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
     }
 }

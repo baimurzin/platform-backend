@@ -8,4 +8,8 @@ public class MailService {
     public void sendCreationEmail(User newUser) {
 
     }
+
+    public void sendActivationEmail(User newUser) {
+
+    }
 }

@@ -1,29 +1,20 @@
 package com.pwrstd.platform.backend.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "roles")
 public class Role {
 
+    @NotNull
+    @Size(max = 50)
     @Id
-    @GeneratedValue
-    private Long id;
-
+    @Column(length = 50)
     private String name;
 
     private String description;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
