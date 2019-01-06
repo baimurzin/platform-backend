@@ -1,5 +1,7 @@
 package com.pwrstd.platform.backend.service;
 
-public class PaymentService {
+public interface PaymentService {
+
+    void checkout();
 
 }

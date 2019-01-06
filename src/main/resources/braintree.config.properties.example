@@ -1,0 +1,6 @@
+#just example, copy to braintree.config.properties
+
+braintree.environment=sandbox
+braintree.merchant_id=test
+braintree.public_key=test
+braintree.private_key=test
