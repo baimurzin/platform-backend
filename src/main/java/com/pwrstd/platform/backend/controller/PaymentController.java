@@ -6,6 +6,7 @@ import com.braintreegateway.Result;
 import com.braintreegateway.Transaction;
 import com.braintreegateway.TransactionRequest;
 import com.pwrstd.platform.backend.controller.errors.BadRequestAlertException;
+import com.pwrstd.platform.backend.security.SecurityUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api")
 public class PaymentController {
 
 
@@ -30,6 +31,16 @@ public class PaymentController {
         return ResponseEntity.ok(braintreeGateway.clientToken().generate());
     }
 
+    @RequestMapping("/test/user")
+    public String testUser() {
+        return SecurityUtils.getCurrentUserLogin().get();
+    }
+
+
+    @RequestMapping("/test/unconfirmed")
+    public String testUnconfirmed() {
+        return SecurityUtils.getCurrentUserLogin().get();
+    }
 
     @PostMapping("/checkout")
     public ResponseEntity checkout(@RequestParam("amount") String amount,
@@ -51,7 +62,8 @@ public class PaymentController {
         Result<Transaction> result = braintreeGateway.transaction().sale(request);
 
         if (result.isSuccess()) {
-
+            Transaction transaction = result.getTarget();
+            
         }
         return ResponseEntity.ok(result);
     }

@@ -45,11 +45,9 @@ public class AccountController {
      * @throws RuntimeException 500 (Internal Server Error) if the user couldn't be activated
      */
     @GetMapping("/activate")
-    public void activateAccount(@RequestParam(value = "key") String key) {
-        Optional<User> user = userService.activateRegistration(key);
-        if (!user.isPresent()) {
-            throw new InternalServerErrorException("No user was found for this activation key");
-        }
+    public ResponseEntity activateAccount(@RequestParam(value = "key") String key) {
+        return userService.activateRegistration(key).map(ResponseEntity::ok)
+                .orElseThrow(() -> new InternalServerErrorException("This link is expired or does not exists"));
     }
 
     /**

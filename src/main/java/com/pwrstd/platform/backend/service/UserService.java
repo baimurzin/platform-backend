@@ -3,9 +3,7 @@ package com.pwrstd.platform.backend.service;
 import com.pwrstd.platform.backend.dto.UserDTO;
 import com.pwrstd.platform.backend.model.Role;
 import com.pwrstd.platform.backend.model.User;
-import com.pwrstd.platform.backend.repository.RoleRepository;
 import com.pwrstd.platform.backend.repository.UserRepository;
-import com.pwrstd.platform.backend.security.AuthoritiesConstants;
 import com.pwrstd.platform.backend.security.SecurityUtils;
 import com.pwrstd.platform.backend.service.util.RandomUtil;
 import org.slf4j.Logger;
@@ -28,12 +26,10 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.roleRepository = roleRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -43,6 +39,7 @@ public class UserService {
                     // activate given user for the registration key.
                     user.setConfirmed(true);
                     user.setActivationKey(null);
+                    user.setRole(Role.USER);
                     log.debug("Activated user: {}", user);
                     return user;
                 });
@@ -58,14 +55,9 @@ public class UserService {
         user.setConfirmed(false);
         user.setCreatedDate(Instant.now());
         user.setActivationKey(RandomUtil.generateActivationKey());
-        //todo
+        //todo currency
         user.setCurrency("RUR");
-        roleRepository.findById(AuthoritiesConstants.UNCONFIRMED).ifPresent(user::setRole);
-        if (user.getRole() == null) {
-            Role role = new Role(AuthoritiesConstants.UNCONFIRMED);
-            roleRepository.saveAndFlush(role);
-            user.setRole(role);
-        }
+        user.setRole(Role.UNCONFIRMED);
         user.setTimezone(userDTO.getTimezone());
         userRepository.save(user);
         log.debug("Created Information for User: {}", user);

@@ -2,8 +2,11 @@ package com.pwrstd.platform.backend.controller;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pwrstd.platform.backend.dto.LoginDTO;
+import com.pwrstd.platform.backend.security.UserNotActivatedException;
 import com.pwrstd.platform.backend.security.jwt.JWTFilter;
 import com.pwrstd.platform.backend.security.jwt.TokenProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +24,8 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api")
 public class UserJWTController {
+
+    private final static Logger log = LoggerFactory.getLogger(UserJWTController.class);
 
     private final AuthenticationManager authenticationManager;
 

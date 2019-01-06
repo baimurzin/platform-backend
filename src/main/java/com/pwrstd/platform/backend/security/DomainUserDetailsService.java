@@ -31,7 +31,7 @@ public class DomainUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException, UserNotActivatedException {
         log.debug("Authenticating {}", email);
         if (new EmailValidator().isValid(email, null)) {
             return userRepository.findOneByEmailIgnoreCase(email)
@@ -42,15 +42,15 @@ public class DomainUserDetailsService implements UserDetailsService {
     }
 
     private org.springframework.security.core.userdetails.User createSpringSecurityUser(String lowercaseLogin, User user) {
-        if (!user.isConfirmed()) {
-            throw new UserNotActivatedException("User " + lowercaseLogin + " was not activated");
-        }
+//        if (!user.isConfirmed()) {
+//            throw new UserNotActivatedException("User " + lowercaseLogin + " was not activated");
+//        }
 //        List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()
 //                .map(authority -> new SimpleGrantedAuthority(authority.getName()))
 //                .collect(Collectors.toList());
 
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
+        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().name()));
         return new org.springframework.security.core.userdetails.User(user.getEmail(),
                 user.getPassword(),
                 grantedAuthorities);

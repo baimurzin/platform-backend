@@ -1,5 +1,6 @@
 package com.pwrstd.platform.backend.security;
 
+import com.pwrstd.platform.backend.model.Role;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -54,7 +55,7 @@ public final class SecurityUtils {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         return Optional.ofNullable(securityContext.getAuthentication())
             .map(authentication -> authentication.getAuthorities().stream()
-                .noneMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(AuthoritiesConstants.ANONYMOUS)))
+                .noneMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(Role.ANONYMOUS.name())))
             .orElse(false);
     }
 

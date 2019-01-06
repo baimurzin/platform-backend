@@ -59,8 +59,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<PaymentTransaction> paymentTransactions;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     public Long getId() {

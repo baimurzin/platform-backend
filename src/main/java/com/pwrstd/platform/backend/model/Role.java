@@ -4,38 +4,14 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "roles")
-public class Role {
+public enum  Role {
+    USER("ROLE_USER"),
+    ANONYMOUS("ROLE_ANONYMOUS"),
+    ADMIN("ROLE_ADMIN"),
+    UNCONFIRMED("ROLE_UNCONFIRMED")
+    ;
 
-    @NotNull
-    @Size(max = 50)
-    @Id
-    @Column(length = 50)
-    private String name;
+    Role(String roleName) {
 
-    private String description;
-
-    public Role() {
-    }
-
-    public Role(@NotNull @Size(max = 50) String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

@@ -1,6 +1,6 @@
 package com.pwrstd.platform.backend.config;
 
-import com.pwrstd.platform.backend.security.AuthoritiesConstants;
+import com.pwrstd.platform.backend.model.Role;
 import com.pwrstd.platform.backend.security.jwt.JWTConfigurer;
 import com.pwrstd.platform.backend.security.jwt.TokenProvider;
 import org.springframework.beans.factory.BeanInitializationException;
@@ -97,7 +97,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/account/reset-password/init").permitAll()
             .antMatchers("/api/account/reset-password/finish").permitAll()
             .antMatchers("/braintree/token").permitAll()
-            .antMatchers("/api/user/**").hasAnyAuthority(AuthoritiesConstants.UNCONFIRMED, AuthoritiesConstants.USER)
+            .antMatchers("/api/user/**").hasAnyAuthority(Role.UNCONFIRMED.name(), Role.USER.name())
+            .antMatchers("/api/test/unconfirmed").hasAuthority(Role.UNCONFIRMED.name())
+            .antMatchers("/api/test/user").hasAuthority(Role.USER.name())
             .anyRequest().authenticated()
 //            .antMatchers("/api/**").authenticated()
         .and()
