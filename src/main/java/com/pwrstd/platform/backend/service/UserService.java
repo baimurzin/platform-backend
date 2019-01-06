@@ -1,6 +1,7 @@
 package com.pwrstd.platform.backend.service;
 
 import com.pwrstd.platform.backend.dto.UserDTO;
+import com.pwrstd.platform.backend.model.Role;
 import com.pwrstd.platform.backend.model.User;
 import com.pwrstd.platform.backend.repository.RoleRepository;
 import com.pwrstd.platform.backend.repository.UserRepository;
@@ -60,6 +61,11 @@ public class UserService {
         //todo
         user.setCurrency("RUR");
         roleRepository.findById(AuthoritiesConstants.UNCONFIRMED).ifPresent(user::setRole);
+        if (user.getRole() == null) {
+            Role role = new Role(AuthoritiesConstants.UNCONFIRMED);
+            roleRepository.saveAndFlush(role);
+            user.setRole(role);
+        }
         user.setTimezone(userDTO.getTimezone());
         userRepository.save(user);
         log.debug("Created Information for User: {}", user);

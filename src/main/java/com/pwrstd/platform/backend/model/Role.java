@@ -16,6 +16,13 @@ public class Role {
 
     private String description;
 
+    public Role() {
+    }
+
+    public Role(@NotNull @Size(max = 50) String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
