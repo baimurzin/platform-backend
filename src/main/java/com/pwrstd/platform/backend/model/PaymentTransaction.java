@@ -20,6 +20,9 @@ public class PaymentTransaction {
     @ManyToOne
     private User user;
 
+    @Column(name = "transaction_id")
+    private String transactionID;
+
     @Enumerated(EnumType.STRING)
     private PaymentTransactionType paymentTransactionType;
 
@@ -76,5 +79,13 @@ public class PaymentTransaction {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getTransactionID() {
+        return transactionID;
+    }
+
+    public void setTransactionID(String transactionID) {
+        this.transactionID = transactionID;
     }
 }
