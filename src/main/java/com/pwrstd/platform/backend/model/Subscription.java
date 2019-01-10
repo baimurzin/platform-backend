@@ -1,6 +1,7 @@
 package com.pwrstd.platform.backend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pwrstd.platform.backend.model.key.UserPlanId;
 
 import javax.persistence.*;
@@ -14,10 +15,12 @@ public class Subscription {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("userId")
+    @JsonIgnore
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("planId")
+    @JsonIgnore
     private Plan plan;
 
     public UserPlanId getId() {

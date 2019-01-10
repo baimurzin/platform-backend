@@ -29,6 +29,8 @@ public class User {
     @JsonIgnore
     private String activationKey;
 
+    //todo https://github.com/JavaMoney/jsr354-api
+    //https://stackoverflow.com/questions/1359817/using-bigdecimal-to-work-with-currencies
     private BigDecimal balance;
 
     private String currency;

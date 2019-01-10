@@ -1,5 +1,5 @@
 package com.pwrstd.platform.backend.model.enums;
 
 public enum PaymentTransactionType {
-    BRAINTREE
+    BUY_PLAN, BRAINTREE
 }

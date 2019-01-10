@@ -2,6 +2,7 @@ package com.pwrstd.platform.backend.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pwrstd.platform.backend.model.enums.PaymentTransactionType;
 import com.pwrstd.platform.backend.model.enums.PaymentVendorType;
 
@@ -18,6 +19,7 @@ public class PaymentTransaction {
     private Long id;
 
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     @Column(name = "transaction_id")

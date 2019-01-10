@@ -100,7 +100,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/user/**").hasAnyAuthority(Role.UNCONFIRMED.name(), Role.USER.name())
             .antMatchers("/api/test/unconfirmed").hasAuthority(Role.UNCONFIRMED.name())
             .antMatchers("/api/test/user").hasAuthority(Role.USER.name())
-            .anyRequest().authenticated()
+            .anyRequest().hasAuthority(Role.USER.name())
 //            .antMatchers("/api/**").authenticated()
         .and()
             .apply(securityConfigurerAdapter());
