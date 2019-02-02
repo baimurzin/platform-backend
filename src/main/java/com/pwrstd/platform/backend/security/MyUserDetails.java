@@ -27,7 +27,7 @@ public class MyUserDetails implements SocialUserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new HashSet<>(1);
-        authorities.add(new SimpleGrantedAuthority(user.getRole().name()));
+        authorities.add(new SimpleGrantedAuthority("ROLE_"+user.getRole().name()));
         return authorities;
     }
 

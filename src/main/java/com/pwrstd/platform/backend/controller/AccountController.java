@@ -7,11 +7,16 @@ import com.pwrstd.platform.backend.controller.util.HeaderUtil;
 import com.pwrstd.platform.backend.dto.UserDTO;
 import com.pwrstd.platform.backend.model.User;
 import com.pwrstd.platform.backend.repository.UserRepository;
+import com.pwrstd.platform.backend.security.SecurityUtils;
 import com.pwrstd.platform.backend.service.MailService;
 import com.pwrstd.platform.backend.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +24,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Optional;
+import java.util.function.Function;
 
 @RestController
 @RequestMapping("/api")
@@ -45,9 +51,13 @@ public class AccountController {
      * @throws RuntimeException 500 (Internal Server Error) if the user couldn't be activated
      */
     @GetMapping("/activate")
-    public ResponseEntity activateAccount(@RequestParam(value = "key") String key) {
-        return userService.activateRegistration(key).map(ResponseEntity::ok)
+    @ResponseStatus(value = HttpStatus.OK)
+    public void activateAccount(@RequestParam(value = "key") String key, HttpServletRequest request) {
+        userService.activateRegistration(key)
+//                .map(SecurityUtils::updateContext) //update context
+//                .map(ResponseEntity::ok
                 .orElseThrow(() -> new InternalServerErrorException("This link is expired or does not exists"));
+        new SecurityContextLogoutHandler().logout(request, null, null);
     }
 
     /**

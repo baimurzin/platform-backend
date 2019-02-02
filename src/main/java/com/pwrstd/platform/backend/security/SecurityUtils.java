@@ -1,10 +1,17 @@
 package com.pwrstd.platform.backend.security;
 
 import com.pwrstd.platform.backend.model.Role;
+import com.pwrstd.platform.backend.model.User;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -32,6 +39,17 @@ public final class SecurityUtils {
                 }
                 return null;
             });
+    }
+
+    public static User updateContext(User user) {
+        List<GrantedAuthority> updatedAuthorities = new ArrayList<>();
+        updatedAuthorities.add(new SimpleGrantedAuthority("ROLE_"+user.getRole().name()));
+
+        UserDetails userDetails = new MyUserDetails(user);
+        Authentication newAuth = new UsernamePasswordAuthenticationToken(userDetails, null, updatedAuthorities);
+        SecurityContextHolder.clearContext();
+        SecurityContextHolder.getContext().setAuthentication(newAuth);
+        return user;
     }
 
 

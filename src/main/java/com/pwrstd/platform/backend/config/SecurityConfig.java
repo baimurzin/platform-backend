@@ -55,10 +55,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/api/register").permitAll()
 //                .anyRequest().authenticated()
 //                .and().csrf().disable();
+        // @formatter:off
 
         http
                 .csrf().disable()
-                .anonymous().and()
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/", true)
@@ -77,11 +77,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/error",
                         "/signup",
                         "/css/**",
-                        "/js/**"
+                        "/js/**",
+                        "/api/activate",
+                        "/api/register"
                 ).permitAll()
                 .antMatchers("/**").hasRole("USER")
             .and()
                 .apply(new SpringSocialConfigurer());
+
+        // @formatter:on
     }
 
     @Bean

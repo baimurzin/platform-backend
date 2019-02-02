@@ -37,7 +37,7 @@ public class CustomAuthProvider implements AuthenticationProvider {
 
         if (passwordEncoder.matches(password, user.getPassword())) {
             List<GrantedAuthority> roles = new ArrayList<>();
-            roles.add(new SimpleGrantedAuthority(user.getRole().name()));
+            roles.add(new SimpleGrantedAuthority("ROLE_"+user.getRole().name()));
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password, roles);
             SecurityContextHolder.getContext().setAuthentication(token);
             return token;
