@@ -7,6 +7,7 @@ import com.pwrstd.platform.backend.repository.CourseRepository;
 import com.pwrstd.platform.backend.repository.UserRepository;
 import com.pwrstd.platform.backend.service.CourseService;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,9 +41,10 @@ public class CourseController {
     }
 
     @GetMapping("/course/{id}")
+    @Transactional
     public String joinCourse(@PathVariable Long id, Model model) {
         Course course = courseRepository.getOne(id);
-        Step step = courseService.goNextStepForCourse(course);
+        Step step = courseService.getCurrentStepForCourse(course);
         return "course";
     }
 }
