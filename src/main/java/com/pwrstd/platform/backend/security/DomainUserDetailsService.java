@@ -31,15 +31,18 @@ public class DomainUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException, UserNotActivatedException {
+    public MyUserDetails loadUserByUsername(final String email) throws UsernameNotFoundException, UserNotActivatedException {
         log.debug("Authenticating {}", email);
         if (new EmailValidator().isValid(email, null)) {
             return userRepository.findOneByEmailIgnoreCase(email)
-                    .map(user -> createSpringSecurityUser(email, user))
+                    .map(MyUserDetails::new)
                     .orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " was not found in the database"));
         }
-        return null;
+        throw new RuntimeException("Email invalid: " + email);
     }
+
+
+
 
     private org.springframework.security.core.userdetails.User createSpringSecurityUser(String lowercaseLogin, User user) {
 //        if (!user.isConfirmed()) {

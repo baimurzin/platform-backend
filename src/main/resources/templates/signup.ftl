@@ -1,7 +1,7 @@
 <html>
 
 <head>
-    <#--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+<#--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -41,16 +41,16 @@
 <div class="section"></div>
 <main>
     <center>
-        <#--<img class="responsive-img" style="width: 250px;" src="/img/logo.svg" />-->
+    <#--<img class="responsive-img" style="width: 250px;" src="/img/logo.svg" />-->
         <div class="section"></div>
 
-        <h5 class="indigo-text">Please, login into your account</h5>
+        <h5 class="indigo-text">Please, complete your registration</h5>
         <div class="section"></div>
 
         <div class="container">
             <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-                <form class="col s12" method="post">
+                <form class="col s12" method="post" action="/signup">
                     <div class='row'>
                         <div class='col s12'>
                         </div>
@@ -58,7 +58,7 @@
 
                     <div class='row'>
                         <div class='input-field col s12'>
-                            <input class='validate' type='email' name='username' id='email' />
+                            <input class='validate' type='email' value="${user.email!""}" name='email' id='email' />
                             <label for='email'>Enter your email</label>
                         </div>
                     </div>
@@ -73,26 +73,10 @@
                     <br />
                     <center>
                         <div class='row'>
-                            <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>
+                            <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Sign up!</button>
                         </div>
                     </center>
-
-                    <a  href="/auth/github" class="waves-effect waves-light btn-large social github">
-                        <i class="fab fa-github"></i> Sign in with github</a>
-
                 </form>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col m6">
-                    <a href="#!">Create account</a>
-                </div>
-                <div class="col m6">
-                    <label >
-                        <a class='pink-text' href='#!'><b>Forgot Password?</b></a>
-                    </label>
-                </div>
             </div>
         </div>
 
