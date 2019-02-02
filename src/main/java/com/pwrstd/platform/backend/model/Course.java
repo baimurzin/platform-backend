@@ -3,14 +3,23 @@ package com.pwrstd.platform.backend.model;
 
 
 import com.pwrstd.platform.backend.model.enums.CourseType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "courses")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Course {
 
     @Id
@@ -41,59 +50,6 @@ public class Course {
     )
     private List<UserCourse> userCourses = new ArrayList<>();
 
-    public List<CourseCategory> getCourseCategories() {
-        return courseCategories;
-    }
-
-    public void setCourseCategories(List<CourseCategory> courseCategories) {
-        this.courseCategories = courseCategories;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public CourseType getCourseType() {
-        return courseType;
-    }
-
-    public void setCourseType(CourseType courseType) {
-        this.courseType = courseType;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public List<UserCourse> getUserCourses() {
-        return userCourses;
-    }
-
-    public void setUserCourses(List<UserCourse> userCourses) {
-        this.userCourses = userCourses;
-    }
+    @OneToMany(mappedBy = "course")
+    private Set<UserCourseStep> userCourseSteps;
 }

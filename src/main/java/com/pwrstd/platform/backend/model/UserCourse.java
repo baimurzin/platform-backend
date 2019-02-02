@@ -3,11 +3,19 @@ package com.pwrstd.platform.backend.model;
 
 import com.pwrstd.platform.backend.model.enums.CourseStatus;
 import com.pwrstd.platform.backend.model.key.UserCourseId;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "user_courses")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserCourse {
 
     @EmbeddedId
@@ -23,36 +31,4 @@ public class UserCourse {
 
     @Enumerated(EnumType.STRING)
     private CourseStatus courseStatus;
-
-    public UserCourseId getId() {
-        return id;
-    }
-
-    public void setId(UserCourseId id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public CourseStatus getCourseStatus() {
-        return courseStatus;
-    }
-
-    public void setCourseStatus(CourseStatus courseStatus) {
-        this.courseStatus = courseStatus;
-    }
 }

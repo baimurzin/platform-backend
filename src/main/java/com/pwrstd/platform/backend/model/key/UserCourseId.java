@@ -1,11 +1,20 @@
 package com.pwrstd.platform.backend.model.key;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserCourseId implements Serializable {
 
     @Column(name = "user_id")
@@ -13,29 +22,6 @@ public class UserCourseId implements Serializable {
 
     @Column(name = "course_id")
     private Long courseId;
-
-    private UserCourseId() {}
-
-    public UserCourseId(Long userId, Long courseId) {
-        this.userId = userId;
-        this.courseId = courseId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getCourseId() {
-        return courseId;
-    }
-
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
-    }
 
     @Override
     public boolean equals(Object o) {

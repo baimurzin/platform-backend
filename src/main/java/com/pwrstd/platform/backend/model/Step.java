@@ -1,6 +1,10 @@
 package com.pwrstd.platform.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -8,74 +12,43 @@ import java.util.Set;
 
 @Entity
 @Table(name = "steps")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Step {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    //not generated
-    private Long currentStep;
-
     @ManyToOne
     @JsonIgnore
     private Course course;
 
-    private String description;
+    @Column
+    private String content;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_course_steps",
-            joinColumns = { @JoinColumn(name = "step_id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id")}
-    )
-    private Set<User> usersOnThisStep;
+    @OneToMany(mappedBy = "step")
+    private Set<UserCourseStep> userCourseSteps;
 
+    @OneToOne
+    private Step next;
 
-    public Long getId() {
-        return id;
+    @OneToOne
+    private Step prev;
+
+    public Step switchToNext() {
+        Step next = this.next;
+        this.prev = next;
+        this.next = next.getNext();
+        return next;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getCurrentStep() {
-        return currentStep;
-    }
-
-    public void setCurrentStep(Long currentStep) {
-        this.currentStep = currentStep;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Set<User> getUsersOnThisStep() {
-        return usersOnThisStep;
-    }
-
-    public void addUserToThisStep(User user) {
-        if (this.usersOnThisStep == null) {
-            this.usersOnThisStep = new HashSet<>();
-        }
-        this.usersOnThisStep.add(user);
-    }
-
-    public void setUsersOnThisStep(Set<User> usersOnThisStep) {
-        this.usersOnThisStep = usersOnThisStep;
+    public Step switchToPrev() {
+        Step prev = this.prev;
+        this.next = prev;
+        this.prev = prev.getPrev();
+        return prev;
     }
 }
