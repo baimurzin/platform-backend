@@ -3,9 +3,12 @@ package com.pwrstd.platform.backend.service.impl;
 import com.pwrstd.platform.backend.model.Course;
 import com.pwrstd.platform.backend.model.Step;
 import com.pwrstd.platform.backend.model.User;
+import com.pwrstd.platform.backend.model.UserCourseStep;
 import com.pwrstd.platform.backend.repository.StepRepository;
+import com.pwrstd.platform.backend.repository.UserCourseStepRepository;
 import com.pwrstd.platform.backend.service.CourseService;
 import com.pwrstd.platform.backend.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +16,13 @@ import org.springframework.stereotype.Service;
 public class CourseServiceImpl implements CourseService {
 
     private final UserService userService;
+    private final UserCourseStepRepository userCourseStepRepository;
     private final StepRepository stepRepository;
 
-    public CourseServiceImpl(UserService userService, StepRepository stepRepository) {
+    @Autowired
+    public CourseServiceImpl(UserService userService, UserCourseStepRepository userCourseStepRepository, StepRepository stepRepository) {
         this.userService = userService;
+        this.userCourseStepRepository = userCourseStepRepository;
         this.stepRepository = stepRepository;
     }
 
@@ -24,38 +30,42 @@ public class CourseServiceImpl implements CourseService {
     public Step getCurrentStepForCourse(Course course) {
         User user = userService.getCurrentUser()
                 .orElseThrow(() -> new BadCredentialsException("User not logged in"));
-        Step currentStep = stepRepository.findStepByCourseAndUsersOnThisStep(course, user);
-        return currentStep;
+        UserCourseStep currentStep = userCourseStepRepository.findByUserAndCourse(user, course);
+        if (currentStep == null) {
+            return null;
+        }
+        return currentStep.getStep();
     }
 
     @Override
     public Step goNextStepForCourse(Course course) {
         User user = userService.getCurrentUser()
                 .orElseThrow(() -> new BadCredentialsException("User not logged in"));
-        Step currentStep = stepRepository.findStepByCourseAndUsersOnThisStep(course, user);
+        UserCourseStep currentStep = userCourseStepRepository.findByUserAndCourse(user, course);
         if (currentStep == null) {
             return initializeCourse(course);
         }
-        Long nextStep = currentStep.getCurrentStep() + 1;
-        currentStep.setCurrentStep(nextStep);
-        stepRepository.save(currentStep);
-        return currentStep;
+
+        Step next = currentStep.getStep().switchToNext();
+        currentStep.setStep(next);
+        userCourseStepRepository.save(currentStep);
+        return next;
     }
 
     @Override
     public Step initializeCourse(Course course) {
         User user = userService.getCurrentUser()
                 .orElseThrow(() -> new BadCredentialsException("User not logged in"));
-        Step currentStep = stepRepository.findStepByCourseAndUsersOnThisStep(course, user);
-        if (currentStep != null) {
-            throw new RuntimeException("Course already initialized");
-        }
-        Step step = new Step();
-        step.setCurrentStep(1L);
-        step.setCourse(course);
-        step.addUserToThisStep(user);
-        stepRepository.save(step);
-        return null;
+
+        Step firstStep = stepRepository.findFirstStep(course);
+        UserCourseStep ucs = UserCourseStep.builder()
+                .course(course)
+                .user(user)
+                .step(firstStep)
+                .build();
+        userCourseStepRepository.save(ucs);
+
+        return firstStep;
     }
 
 }

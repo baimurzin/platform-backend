@@ -45,6 +45,10 @@ public class CourseController {
     public String joinCourse(@PathVariable Long id, Model model) {
         Course course = courseRepository.getOne(id);
         Step step = courseService.getCurrentStepForCourse(course);
+        if (step == null) {
+            step = courseService.initializeCourse(course);
+        }
+        model.addAttribute("step", step);
         return "course";
     }
 }

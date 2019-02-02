@@ -1,0 +1,29 @@
+POST http://localhost:8010/api/register
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+<> 2019-02-02T082054.400.json
+
+
+###
+
+POST http://localhost:8010/login
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Content-Type: application/x-www-form-urlencoded
+Origin: http://localhost:8010
+Referer: http://localhost:8010/login
+
+username={{email}}&password={{password}}
+
+###
+
+GET http://localhost:8010/course/1
+Cookie: JSESSIONID=0F9C6063EAD867EEB04E33AABE2E7F89
+
+
+###
+
