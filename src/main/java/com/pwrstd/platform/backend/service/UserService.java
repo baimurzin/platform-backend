@@ -1,6 +1,7 @@
 package com.pwrstd.platform.backend.service;
 
 import com.pwrstd.platform.backend.dto.UserDTO;
+import com.pwrstd.platform.backend.model.Plan;
 import com.pwrstd.platform.backend.model.Role;
 import com.pwrstd.platform.backend.model.User;
 import com.pwrstd.platform.backend.repository.UserRepository;
@@ -30,6 +31,12 @@ public class UserService {
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+    }
+
+    @Transactional(readOnly = true)
+    public Plan getActiveUserPlan() {
+
+        return null;
     }
 
     public Optional<User> activateRegistration(String key) {

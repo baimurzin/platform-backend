@@ -1,13 +1,15 @@
 package com.pwrstd.platform.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "plans")
 public class Plan {
-
 
     @Id
     @GeneratedValue
@@ -24,12 +26,13 @@ public class Plan {
     @Column(name = "course_count")
     private Integer courseCount;
 
-    @OneToMany(
-            mappedBy = "plan",
-            orphanRemoval = true,
-            cascade = CascadeType.ALL
-    )
-    private List<Subscription> subscriptions;
+    @OneToOne
+    @JsonIgnore
+    private User user;
+
+    private Date startPlan;
+
+    private Date endPlan;
 
     public Long getId() {
         return id;
@@ -71,11 +74,27 @@ public class Plan {
         this.courseCount = courseCount;
     }
 
-    public List<Subscription> getSubscriptions() {
-        return subscriptions;
+    public User getUser() {
+        return user;
     }
 
-    public void setSubscriptions(List<Subscription> subscriptions) {
-        this.subscriptions = subscriptions;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Date getStartPlan() {
+        return startPlan;
+    }
+
+    public void setStartPlan(Date startPlan) {
+        this.startPlan = startPlan;
+    }
+
+    public Date getEndPlan() {
+        return endPlan;
+    }
+
+    public void setEndPlan(Date endPlan) {
+        this.endPlan = endPlan;
     }
 }

@@ -39,6 +39,9 @@ public class User {
 
     private String timezone;
 
+    @OneToOne
+    private Plan plan;
+
     @CreatedDate
     @Column(name = "created_date", nullable = false, updatable = false)
     @JsonIgnore
@@ -50,13 +53,6 @@ public class User {
             cascade = CascadeType.ALL
     )
     private List<UserCourse> userCourses = new ArrayList<>();
-
-    @OneToMany(
-            mappedBy = "user",
-            orphanRemoval = true,
-            cascade = CascadeType.ALL
-    )
-    private List<Subscription> subscriptions;
 
     @OneToMany(mappedBy = "user")
     private List<PaymentTransaction> paymentTransactions;
@@ -168,12 +164,12 @@ public class User {
         this.role = role;
     }
 
-    public List<Subscription> getSubscriptions() {
-        return subscriptions;
+    public Plan getPlan() {
+        return plan;
     }
 
-    public void setSubscriptions(List<Subscription> subscriptions) {
-        this.subscriptions = subscriptions;
+    public void setPlan(Plan plan) {
+        this.plan = plan;
     }
 }
 

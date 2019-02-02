@@ -3,14 +3,11 @@ package com.pwrstd.platform.backend.service.impl;
 import com.pwrstd.platform.backend.controller.errors.BadRequestAlertException;
 import com.pwrstd.platform.backend.model.PaymentTransaction;
 import com.pwrstd.platform.backend.model.Plan;
-import com.pwrstd.platform.backend.model.Subscription;
 import com.pwrstd.platform.backend.model.User;
 import com.pwrstd.platform.backend.model.enums.PaymentTransactionType;
 import com.pwrstd.platform.backend.model.key.UserPlanId;
 import com.pwrstd.platform.backend.repository.PaymentRepository;
 import com.pwrstd.platform.backend.repository.PlanRepository;
-import com.pwrstd.platform.backend.repository.SubscriptionRepository;
-import com.pwrstd.platform.backend.repository.UserRepository;
 import com.pwrstd.platform.backend.service.PlanService;
 import com.pwrstd.platform.backend.service.UserService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -28,18 +25,13 @@ public class SubscriptionPlanServiceImpl implements PlanService {
 
     private final UserService userService;
 
-
-    private final SubscriptionRepository subscriptionRepository;
-
     private final PaymentRepository paymentRepository;
 
     public SubscriptionPlanServiceImpl(PlanRepository planRepository,
                                        UserService userService,
-                                       SubscriptionRepository subscriptionRepository,
                                        PaymentRepository paymentRepository) {
         this.planRepository = planRepository;
         this.userService = userService;
-        this.subscriptionRepository = subscriptionRepository;
         this.paymentRepository = paymentRepository;
     }
 
@@ -61,12 +53,11 @@ public class SubscriptionPlanServiceImpl implements PlanService {
 
         user.setBalance(user.getBalance().subtract(plan.getMonthPrice()));
 
-        Subscription subscription = new Subscription();
-        UserPlanId userPlanId = new UserPlanId(user.getId(), plan.getId());
-        subscription.setId(userPlanId);
-        subscription.setPlan(plan);
-        subscription.setUser(user);
-        subscriptionRepository.save(subscription);
+        if (user.getPlan() != null) {
+            user.setPlan(plan);
+        } else {
+
+        }
 
         PaymentTransaction paymentTransaction = new PaymentTransaction();
         paymentTransaction.setAmount(totalSumToTakeFromUser);
