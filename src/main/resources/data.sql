@@ -8,9 +8,9 @@ select 1, 2, 10, 'Test Plan', 100       where 1 not in (select id from plans);
 -- where id not in (1, 2);
 
 INSERT INTO users (id, activation_key, balance, confirmed, created_date, currency, email, lang, password, role, timezone, plan_id) VALUES (1, '42020464482654822267', 0.00, false, '2019-02-02 20:48:34.162000', 'RUR', 'qwe', null, '$2a$10$5fBG6hsBVwXfWDVy53N.pu/fBOZ3BsadRyfEevzWn8S.tu5yonZeK', 'UNCONFIRMED', null, null);
-insert into courses (id, course_type, description, name, price) values (1, 'dick_type1', 'course about my dick1', 'Applied dick1', 14.88);
-insert into courses (id, course_type, description, name, price) values (2, 'dick_type2', 'course about my dick2', 'Applied dick2', 14.89);
-insert into courses (id, course_type, description, name, price) values (3, 'dick_type3', 'course about my dick3', 'Applied dick3', 14.90);
+insert into courses (id, course_type, description, name, price) values (1, 'REGULAR', 'course about my dick1', 'Applied dick1', 14.88);
+insert into courses (id, course_type, description, name, price) values (2, 'REGULAR', 'course about my dick2', 'Applied dick2', 14.89);
+insert into courses (id, course_type, description, name, price) values (3, 'REGULAR', 'course about my dick3', 'Applied dick3', 14.90);
 
 insert into steps (id, content, course_id, next_id, prev_id) values (1, 'dick1', 1, null,null);
 insert into steps (id, content, course_id, next_id, prev_id) values (2, 'dick2', 1, null,null);
