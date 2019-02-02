@@ -4,6 +4,8 @@ import com.pwrstd.platform.backend.dto.UserDTO;
 import com.pwrstd.platform.backend.model.User;
 import com.pwrstd.platform.backend.security.MyUserDetails;
 import com.pwrstd.platform.backend.service.UserService;
+import org.aspectj.lang.annotation.Before;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +14,11 @@ import org.springframework.social.connect.UserProfile;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +50,7 @@ public class SignupController {
         return "signup";
     }
 
-
+    @Transactional
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public String registrationUser(@ModelAttribute UserDTO userDTO, WebRequest request) throws Exception {
         User user = userService.registerUser(userDTO);
