@@ -28,7 +28,7 @@ import java.util.EnumSet;
 
 import static java.net.URLDecoder.decode;
 
-@Configuration
+//@Configuration
 public class WebConfigurer implements ServletContextInitializer, WebServerFactoryCustomizer<WebServerFactory> {
 
     private final Logger log = LoggerFactory.getLogger(WebConfigurer.class);

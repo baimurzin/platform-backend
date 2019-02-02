@@ -30,7 +30,7 @@ public class CourseController {
     }
 
     @GetMapping("/courses")
-    public String coursePage(Model model) {
+    public String coursesPage(Model model) {
 //        User currentUser = SecurityUtils.getCurrentUserLogin()
 //                .flatMap(userRepository::findOneByEmailIgnoreCase)
 //                .orElseThrow(() -> new RuntimeException("User not found"));

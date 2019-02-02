@@ -35,7 +35,7 @@ public class Course {
 
     private BigDecimal price; //todo refactoring in separated table
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "course_categories_link",
             joinColumns = { @JoinColumn(name = "course_id")},

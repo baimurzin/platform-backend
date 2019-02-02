@@ -1,7 +1,7 @@
 package com.pwrstd.platform.backend.dto;
 
 
-import com.pwrstd.platform.backend.model.User;
+import org.springframework.social.connect.UserProfile;
 
 public class UserDTO {
     private Long id;
@@ -12,6 +12,12 @@ public class UserDTO {
     private String langKey;
 
     public UserDTO() {
+    }
+
+    public static UserDTO fromSocialUserProfile(UserProfile userProfile) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setEmail(userProfile.getEmail());
+        return userDTO;
     }
 
     public Long getId() {
