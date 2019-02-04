@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class StepController {
 
-
-    @GetMapping
-    public ResponseEntity next() {
-
-        return null;
-    }
+//
+//    @GetMapping
+//    public ResponseEntity next() {
+//
+//        return null;
+//    }
 
 
 }

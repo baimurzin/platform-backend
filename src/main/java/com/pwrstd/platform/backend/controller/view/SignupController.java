@@ -5,6 +5,8 @@ import com.pwrstd.platform.backend.model.User;
 import com.pwrstd.platform.backend.security.MyUserDetails;
 import com.pwrstd.platform.backend.service.UserService;
 import org.aspectj.lang.annotation.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -27,6 +29,8 @@ import org.springframework.web.context.request.WebRequest;
 
 @Controller
 public class SignupController {
+
+    private final static Logger log = LoggerFactory.getLogger(SignupController.class);
 
     private final ProviderSignInUtils providerSignInUtils;
     private final UserService userService;
@@ -61,6 +65,7 @@ public class SignupController {
         Authentication authentication = new UsernamePasswordAuthenticationToken(myUserDetails, null, myUserDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
+        log.info("http://localhost:8080/api/activate?key=" + user.getActivationKey());
         return "redirect:/";
 
     }

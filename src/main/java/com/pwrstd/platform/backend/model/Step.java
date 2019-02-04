@@ -1,13 +1,13 @@
 package com.pwrstd.platform.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pwrstd.platform.backend.model.enums.StepType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -25,6 +25,11 @@ public class Step {
     @ManyToOne
     @JsonIgnore
     private Course course;
+
+    @Enumerated(EnumType.STRING)
+    private StepType type;
+
+    private String title;
 
     @Column
     private String content;
