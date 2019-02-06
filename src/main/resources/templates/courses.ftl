@@ -48,7 +48,7 @@
                            <p>${course.description}</p>
                        </div>
                        <div class="card-action">
-                           <a href="/course/${course.id}">Join(Start)</a>
+                           <a href="/app/course/${course.id}">Join(Start)</a>
                        </div>
                    </div>
                </div>

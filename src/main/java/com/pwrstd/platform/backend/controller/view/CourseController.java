@@ -10,10 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Controller
+@RequestMapping("/app")
 public class CourseController {
 
     private final UserRepository userRepository;
@@ -22,19 +24,17 @@ public class CourseController {
     private final CourseService courseService;
     private final StepRepository stepRepository;
     private final UserCourseStepRepository userCourseStepRepository;
-    private final GroovyService groovyService;
 
-    public CourseController(UserRepository userRepository, CourseCategoryRepository courseCategoryRepository, CourseRepository courseRepository, CourseService courseService, StepRepository stepRepository, UserCourseStepRepository userCourseStepRepository, GroovyService groovyService) {
+    public CourseController(UserRepository userRepository, CourseCategoryRepository courseCategoryRepository, CourseRepository courseRepository, CourseService courseService, StepRepository stepRepository, UserCourseStepRepository userCourseStepRepository) {
         this.userRepository = userRepository;
         this.courseCategoryRepository = courseCategoryRepository;
         this.courseRepository = courseRepository;
         this.courseService = courseService;
         this.stepRepository = stepRepository;
         this.userCourseStepRepository = userCourseStepRepository;
-        this.groovyService = groovyService;
     }
 
-    @GetMapping("/courses")
+    @GetMapping("courses")
     public String coursesPage(Model model) {
 //        User currentUser = SecurityUtils.getCurrentUserLogin()
 //                .flatMap(userRepository::findOneByEmailIgnoreCase)
@@ -53,8 +53,10 @@ public class CourseController {
         if (step == null) {
             step = courseService.initializeCourse(course);
         }
+        List<Step> allSteps= stepRepository.findAllByCourse(course);
+
         model.addAttribute("step", step);
-//        model.addAttribute("steps", allSteps);
+        model.addAttribute("steps", allSteps);
         return "course/java/" + step.getType().name().toLowerCase();
     }
 
@@ -70,4 +72,6 @@ public class CourseController {
 
         return "";
     }
+
+
 }

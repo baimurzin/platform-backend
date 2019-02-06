@@ -1,10 +1,13 @@
 package com.pwrstd.platform.backend.config.filter;
 
+import org.springframework.context.annotation.Configuration;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+@Configuration
 public class CachingHttpHeadersFilter implements Filter {
     public static final int DEFAULT_DAYS_TO_LIVE = 1461; // 4 years
     public static final long DEFAULT_SECONDS_TO_LIVE = TimeUnit.DAYS.toMillis(DEFAULT_DAYS_TO_LIVE);

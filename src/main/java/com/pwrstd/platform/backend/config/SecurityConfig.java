@@ -1,25 +1,22 @@
 package com.pwrstd.platform.backend.config;
 
 import com.pwrstd.platform.backend.security.DomainUserDetailsService;
-import com.pwrstd.platform.backend.security.social.SocialUserDetailService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.social.security.SocialUserDetailsService;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
@@ -34,27 +31,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers(HttpMethod.OPTIONS, "/**")
-                .antMatchers("/app/**/*.{js,html}")
-                .antMatchers("/i18n/**")
-                .antMatchers("/content/**")
-                .antMatchers("/img/**")
-                .antMatchers("/resources/**")
-                .antMatchers("/static/**")
-                .antMatchers("/swagger-ui/index.html")
-                .antMatchers("/test/**");
+//                .antMatchers(HttpMethod.OPTIONS, "/**")
+//                .antMatchers("/app/**/*.{js,html}")
+//                .antMatchers("/i18n/**")
+//                .antMatchers("/content/**")
+//                .antMatchers("/img/**")
+                .antMatchers("/resources/**");
+//                .antMatchers(/*"/static/**")
+//                .antMatchers("/swagger-ui/index.html")
+//                .antMatchers(*/"/test/**");
+
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .formLogin().permitAll()
-//                .loginPage("/login")
-//                .and()
-//                .authorizeRequests()
-//                .antMatchers("/api/register").permitAll()
-//                .anyRequest().authenticated()
-//                .and().csrf().disable();
         // @formatter:off
 
         http
@@ -76,12 +66,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/login",
                         "/error",
                         "/signup",
-                        "/css/**",
-                        "/js/**",
+//                        "/css/**",
+//                        "/js/**",
                         "/api/activate",
                         "/api/register"
                 ).permitAll()
-                .antMatchers("/**").hasRole("USER")
+                .antMatchers("/app/**").hasRole("USER")
             .and()
                 .apply(new SpringSocialConfigurer());
 
