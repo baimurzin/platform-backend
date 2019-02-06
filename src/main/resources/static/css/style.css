@@ -1,0 +1,99 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Open Sans;
+}
+
+.non_display {
+  display: none;
+}
+
+.row-margin0 {
+  margin: 0;
+}
+
+.content-container {
+  border: .25px solid #e0e0e0;
+  border-radius: 5px;
+  box-shadow: 0 10px 30px #e0e0e0;
+}
+
+.main-content.col {
+  padding-top: 4%;
+  padding-bottom: 4%;
+}
+
+.pagination li a {
+  font-size: 16px;
+  line-height: 26px;
+
+  color: #bdbdbd;
+}
+
+.course-title, .list-title {
+  font-family: Montserrat;
+  font-size: 30px;
+  line-height: normal;
+
+  color: #05105b;
+}
+.content {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.content p {
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.next-block-btn {
+  font-size: 12px;
+  font-weight: bold;
+  line-height: normal;
+
+  display: block;
+
+  max-width: 243px;
+  padding: 14px 17px;
+
+  border-radius: 30px;
+  box-shadow: 0 10px 30px #e0e0e0;
+}
+
+.blocks-left-inf {
+  margin: 0;
+  margin-top: 12px;
+}
+
+.course-list-of-lessons {
+  max-width: 234px;
+}
+
+.list-title {
+  font-size: 20px;
+}
+
+ul.list-of-lessons {
+  padding-left: 7px;
+}
+
+.list-of-lessons-item {
+  padding-left: 10px;
+}
+
+.list-of-lessons-item a {
+  font-size: 16px;
+  line-height: 35px;
+}
+.list-of-lessons-item.active {
+  display: block;
+
+  color: #3cb3a0;
+  border-radius: 5px;
+}
+.answers-block {
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-top: 20px;
+}

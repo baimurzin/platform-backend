@@ -19,7 +19,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-@Component
+//@Component
 public class TokenProvider {
 
     private final Logger log = LoggerFactory.getLogger(TokenProvider.class);
