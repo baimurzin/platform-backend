@@ -1,5 +1,9 @@
 package com.pwrstd.platform.backend.model.key;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.social.connect.ConnectionKey;
 
 import javax.persistence.Column;
@@ -7,13 +11,15 @@ import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 @Embeddable
+@Builder
+@Data
 public class UserConnectionId implements Serializable {
 
     @Column(name = "providerid")
-    private final String providerId;
+    private String providerId;
 
     @Column(name = "provideruserid")
-    private final String providerUserId;
+    private String providerUserId;
 
     /**
      * Creates a new {@link ConnectionKey}.
@@ -23,6 +29,14 @@ public class UserConnectionId implements Serializable {
     public UserConnectionId(String providerId, String providerUserId) {
         this.providerId = providerId;
         this.providerUserId = providerUserId;
+    }
+
+    public UserConnectionId() {
+    }
+
+    public UserConnectionId(ConnectionKey key) {
+        this.providerId = key.getProviderId();
+        this.providerUserId = key.getProviderUserId();
     }
 
     public String getProviderId() {

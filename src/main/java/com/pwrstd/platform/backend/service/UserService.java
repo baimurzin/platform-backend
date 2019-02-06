@@ -4,6 +4,7 @@ import com.pwrstd.platform.backend.dto.UserDTO;
 import com.pwrstd.platform.backend.model.Plan;
 import com.pwrstd.platform.backend.model.Role;
 import com.pwrstd.platform.backend.model.User;
+import com.pwrstd.platform.backend.model.UserConnection;
 import com.pwrstd.platform.backend.repository.UserRepository;
 import com.pwrstd.platform.backend.security.SecurityUtils;
 import com.pwrstd.platform.backend.service.util.RandomUtil;
@@ -18,6 +19,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -55,8 +57,10 @@ public class UserService {
     public User registerUser(UserDTO userDTO) {
         User user = new User();
         user.setEmail(userDTO.getEmail());
-        String encryptedPassword = passwordEncoder.encode(userDTO.getPassword());
-        user.setPassword(encryptedPassword);
+        if(userDTO.getPassword() != null) {
+            String encryptedPassword = passwordEncoder.encode(userDTO.getPassword());
+            user.setPassword(encryptedPassword);
+        }
         user.setLang(userDTO.getLangKey());
         user.setBalance(BigDecimal.valueOf(0));
         user.setConfirmed(false);

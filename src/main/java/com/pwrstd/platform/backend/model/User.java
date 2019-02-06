@@ -1,10 +1,7 @@
 package com.pwrstd.platform.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -22,6 +19,7 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class User {
 
     @Id
@@ -65,13 +63,16 @@ public class User {
     )
     private List<UserCourse> userCourses = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<PaymentTransaction> paymentTransactions;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private Set<UserConnection> connections;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<UserCourseStep> userCourseSteps;
 }
 

@@ -77,9 +77,8 @@
                         </div>
                     </center>
 
-                    <a  href="/auth/github" class="waves-effect waves-light btn-large social github">
-                        <i class="fab fa-github"></i> Sign in with github</a>
-
+                    <a  href="/login/github" class="waves-effect waves-light btn-large social github">
+                        <i class="fab fa-github"></i> Sign up with github</a>
                 </form>
             </div>
         </div>

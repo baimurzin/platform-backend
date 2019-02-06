@@ -1,4 +1,4 @@
-POST http://localhost:8010/api/register
+POST http://localhost:8080/api/register
 Content-Type: application/json
 
 {
@@ -11,7 +11,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8010/login
+POST http://localhost:8080/login
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
 Content-Type: application/x-www-form-urlencoded
 Origin: http://localhost:8010
@@ -21,9 +21,14 @@ username={{email}}&password={{password}}
 
 ###
 
-GET http://localhost:8010/course/1
+GET http://localhost:8080/course/1
 Cookie: JSESSIONID=0F9C6063EAD867EEB04E33AABE2E7F89
 
 
 ###
 
+GET https://api.github.com/user/repos?access_token=8542e1d231ba8a13a7d7f50d03e37b55970a38d7
+
+
+
+###
