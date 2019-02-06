@@ -4,7 +4,9 @@ import com.pwrstd.platform.backend.model.Course;
 import com.pwrstd.platform.backend.model.Step;
 import com.pwrstd.platform.backend.repository.*;
 import com.pwrstd.platform.backend.service.CourseService;
+import com.pwrstd.platform.backend.service.groovy.GroovyApiContextService;
 import com.pwrstd.platform.backend.service.groovy.GroovyService;
+import org.apache.groovy.util.Maps;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -24,14 +26,18 @@ public class CourseController {
     private final CourseService courseService;
     private final StepRepository stepRepository;
     private final UserCourseStepRepository userCourseStepRepository;
+    private final GroovyService groovyService;
+    private final GroovyApiContextService groovyApiContextService;
 
-    public CourseController(UserRepository userRepository, CourseCategoryRepository courseCategoryRepository, CourseRepository courseRepository, CourseService courseService, StepRepository stepRepository, UserCourseStepRepository userCourseStepRepository) {
+    public CourseController(UserRepository userRepository, CourseCategoryRepository courseCategoryRepository, CourseRepository courseRepository, CourseService courseService, StepRepository stepRepository, UserCourseStepRepository userCourseStepRepository, GroovyService groovyService, GroovyApiContextService groovyApiContextService) {
         this.userRepository = userRepository;
         this.courseCategoryRepository = courseCategoryRepository;
         this.courseRepository = courseRepository;
         this.courseService = courseService;
         this.stepRepository = stepRepository;
         this.userCourseStepRepository = userCourseStepRepository;
+        this.groovyService = groovyService;
+        this.groovyApiContextService = groovyApiContextService;
     }
 
     @GetMapping("courses")
@@ -67,6 +73,7 @@ public class CourseController {
         if (step == null) {
             step = courseService.initializeCourse(course);
         }
+        groovyApiContextService.put(Maps.of("repo_name", "my_dog"));
         Object result = groovyService.execute(step.getScript());
         System.out.println(result);
 

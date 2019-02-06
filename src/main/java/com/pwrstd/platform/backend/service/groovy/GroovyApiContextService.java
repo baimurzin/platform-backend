@@ -1,6 +1,7 @@
 package com.pwrstd.platform.backend.service.groovy;
 
 
+import com.pwrstd.platform.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -14,11 +15,14 @@ import java.util.concurrent.ConcurrentHashMap;
 @Scope(value="session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class GroovyApiContextService {
 
-    private Map<String, String> params = new ConcurrentHashMap<>();
 
+    private Map<String, String> params = new ConcurrentHashMap<>();
 
     public void put(String key, String value) {
         this.params.put(key, value);
+    }
+    public void put(Map<String, String> map) {
+        this.params.putAll(map);
     }
 
     public void delete(String key){
@@ -33,5 +37,8 @@ public class GroovyApiContextService {
         return params.get("name");
     }
 
-    public void
+    public boolean isRepositoryExist(String name) {
+        String tmp = "my_dog";
+        return name.equals(tmp);
+    }
 }

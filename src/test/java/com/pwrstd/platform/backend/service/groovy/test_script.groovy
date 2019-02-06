@@ -1,3 +1,7 @@
 boolean mainMethod(com.pwrstd.platform.backend.service.groovy.GroovyApiContextService api){
-    return 10 < 15
+    def get = api.get("arepo_name")
+    if(get == null) {
+        return false
+    }
+    return api.isRepositoryExist(get)
 }
