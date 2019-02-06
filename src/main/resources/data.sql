@@ -21,6 +21,7 @@ insert into steps (id, content, course_id, next_id, prev_id) values (6, 'dick6',
 insert into steps (id, content, course_id, next_id, prev_id) values (7, 'dick7', 1, null,null);
 insert into steps (id, content, course_id, next_id, prev_id) values (8, 'dick8', 1, null,null);
 
+
 update steps set next_id = 2 where id = 1;
 update steps set next_id = 3, prev_id = 1 where id = 2;
 update steps set next_id = 4, prev_id = 2 where id = 3;
@@ -31,42 +32,42 @@ update steps set next_id = 8, prev_id = 6 where id = 7;
 update steps set prev_id = 7 where id = 8;
 
 
+--
+-- insert into steps (id, content, course_id, next_id, prev_id) values (9, 'dick1', 2, null,null);
+-- insert into steps (id, content, course_id, next_id, prev_id) values (10, 'dick2', 2, null,null);
+-- insert into steps (id, content, course_id, next_id, prev_id) values (11, 'dick3', 2, null,null);
+-- insert into steps (id, content, course_id, next_id, prev_id) values (12, 'dick4', 2, null,null);
+-- insert into steps (id, content, course_id, next_id, prev_id) values (13, 'dick5', 2, null,null);
+-- insert into steps (id, content, course_id, next_id, prev_id) values (14, 'dick6', 2, null,null);
+-- insert into steps (id, content, course_id, next_id, prev_id) values (15, 'dick7', 2, null,null);
+-- insert into steps (id, content, course_id, next_id, prev_id) values (16, 'dick8', 2, null,null);
+--
+-- update steps set next_id = 10 where id = 9;
+-- update steps set next_id = 11, prev_id = 9 where id = 10;
+-- update steps set next_id = 12, prev_id = 10 where id = 11;
+-- update steps set next_id = 13, prev_id = 11 where id = 12;
+-- update steps set next_id = 14, prev_id = 12 where id = 13;
+-- update steps set next_id = 15, prev_id = 13 where id = 14;
+-- update steps set next_id = 16, prev_id = 14 where id = 15;
+-- update steps set prev_id = 15 where id = 16;
+--
+-- insert into steps (id, content, course_id, next_id, prev_id) values (17, 'dick1', 3, null,null);
+-- insert into steps (id, content, course_id, next_id, prev_id) values (18, 'dick2', 3, null,null);
+-- insert into steps (id, content, course_id, next_id, prev_id) values (19, 'dick3', 3, null,null);
+-- insert into steps (id, content, course_id, next_id, prev_id) values (20, 'dick4', 3, null,null);
+-- insert into steps (id, content, course_id, next_id, prev_id) values (21, 'dick5', 3, null,null);
+-- insert into steps (id, content, course_id, next_id, prev_id) values (22, 'dick6', 3, null,null);
+-- insert into steps (id, content, course_id, next_id, prev_id) values (23, 'dick7', 3, null,null);
+-- insert into steps (id, content, course_id, next_id, prev_id) values (24, 'dick8', 3, null,null);
+--
+-- update steps set next_id = 18 where id = 17;
+-- update steps set next_id = 19, prev_id = 17 where id = 18;
+-- update steps set next_id = 20, prev_id = 18 where id = 19;
+-- update steps set next_id = 21, prev_id = 19 where id = 20;
+-- update steps set next_id = 22, prev_id = 20 where id = 21;
+-- update steps set next_id = 23, prev_id = 21 where id = 22;
+-- update steps set next_id = 24, prev_id = 22 where id = 23;
+-- update steps set prev_id = 23 where id = 24;
 
-insert into steps (id, content, course_id, next_id, prev_id) values (9, 'dick1', 2, null,null);
-insert into steps (id, content, course_id, next_id, prev_id) values (10, 'dick2', 2, null,null);
-insert into steps (id, content, course_id, next_id, prev_id) values (11, 'dick3', 2, null,null);
-insert into steps (id, content, course_id, next_id, prev_id) values (12, 'dick4', 2, null,null);
-insert into steps (id, content, course_id, next_id, prev_id) values (13, 'dick5', 2, null,null);
-insert into steps (id, content, course_id, next_id, prev_id) values (14, 'dick6', 2, null,null);
-insert into steps (id, content, course_id, next_id, prev_id) values (15, 'dick7', 2, null,null);
-insert into steps (id, content, course_id, next_id, prev_id) values (16, 'dick8', 2, null,null);
 
-update steps set next_id = 10 where id = 9;
-update steps set next_id = 11, prev_id = 9 where id = 10;
-update steps set next_id = 12, prev_id = 10 where id = 11;
-update steps set next_id = 13, prev_id = 11 where id = 12;
-update steps set next_id = 14, prev_id = 12 where id = 13;
-update steps set next_id = 15, prev_id = 13 where id = 14;
-update steps set next_id = 16, prev_id = 14 where id = 15;
-update steps set prev_id = 15 where id = 16;
-
-insert into steps (id, content, course_id, next_id, prev_id) values (17, 'dick1', 3, null,null);
-insert into steps (id, content, course_id, next_id, prev_id) values (18, 'dick2', 3, null,null);
-insert into steps (id, content, course_id, next_id, prev_id) values (19, 'dick3', 3, null,null);
-insert into steps (id, content, course_id, next_id, prev_id) values (20, 'dick4', 3, null,null);
-insert into steps (id, content, course_id, next_id, prev_id) values (21, 'dick5', 3, null,null);
-insert into steps (id, content, course_id, next_id, prev_id) values (22, 'dick6', 3, null,null);
-insert into steps (id, content, course_id, next_id, prev_id) values (23, 'dick7', 3, null,null);
-insert into steps (id, content, course_id, next_id, prev_id) values (24, 'dick8', 3, null,null);
-
-update steps set next_id = 18 where id = 17;
-update steps set next_id = 19, prev_id = 17 where id = 18;
-update steps set next_id = 20, prev_id = 18 where id = 19;
-update steps set next_id = 21, prev_id = 19 where id = 20;
-update steps set next_id = 22, prev_id = 20 where id = 21;
-update steps set next_id = 23, prev_id = 21 where id = 22;
-update steps set next_id = 24, prev_id = 22 where id = 23;
-update steps set prev_id = 23 where id = 24;
-
-
-commit;
+-- commit;

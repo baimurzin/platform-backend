@@ -32,6 +32,10 @@ public class Step {
     @OneToMany(mappedBy = "step")
     private Set<UserCourseStep> userCourseSteps;
 
+    @ManyToOne
+    @JoinColumn(name = "script_id")
+    private Script script;
+
     @OneToOne
     private Step next;
 
