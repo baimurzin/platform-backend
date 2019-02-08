@@ -10,7 +10,8 @@
 package com.pwrstd.platform.backend.model.enums;
 
 public enum StepType {
-    THEORY("theory");
+    THEORY("theory"),
+    POLL("poll");
 
     private final String name;
 

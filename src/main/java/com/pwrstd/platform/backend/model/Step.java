@@ -37,6 +37,13 @@ public class Step {
     @OneToMany(mappedBy = "step")
     private Set<UserCourseStep> userCourseSteps;
 
+    @OneToOne(mappedBy = "step", cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY, optional = false)
+    private Question questions;
+
+    @Column
+    private Long typeId;
+
     @OneToOne
     private Step next;
 
